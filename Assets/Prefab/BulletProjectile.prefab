@@ -48,6 +48,8 @@ MonoBehaviour:
   moveSpeed: 100
   targetOffest: {x: 0, y: 1.2, z: 0}
   trailRenderer: {fileID: 943078032594637365}
+  bulletHitVFXPrefab: {fileID: 5840866305973995475, guid: 26e8dfbe611b6c64998bc631ef25c9f3,
+    type: 3}
 --- !u!1 &4974317999618540421
 GameObject:
   m_ObjectHideFlags: 0
