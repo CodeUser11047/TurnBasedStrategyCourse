@@ -52,7 +52,7 @@ public class LevelGrid : MonoBehaviour
     /// 用于清除所在gridPosition的Unit
     /// </summary>
     /// <param name="gridPosition"></param>
-    public void RemoveUnitAtPosition(GridPosition gridPosition, Unit unit)
+    public void RemoveUnitAtGridPosition(GridPosition gridPosition, Unit unit)
     {
         GridObject gridObject = gridSystem.GetGridObject(gridPosition);
         gridObject.RemoveUnit(unit);
@@ -66,7 +66,7 @@ public class LevelGrid : MonoBehaviour
     /// <param name="toGridPosition">当前所在的GridPosition</param>
     public void UnitMovedGridPosition(Unit unit, GridPosition fromGridPosition, GridPosition toGridPosition)
     {
-        RemoveUnitAtPosition(fromGridPosition, unit);
+        RemoveUnitAtGridPosition(fromGridPosition, unit);
         AddUnitAtPosition(toGridPosition, unit);
     }
 
