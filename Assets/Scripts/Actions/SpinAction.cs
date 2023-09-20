@@ -43,7 +43,7 @@ public class SpinAction : BaseAction
 
     public override string GetActionName()
     {
-        return "Spin";
+        return "原地转圈";
     }
 
     public override int GetActionPointsCost()

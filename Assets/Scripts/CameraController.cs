@@ -4,7 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using Unity.VisualScripting;
 
-public class CameraController : MonoBehaviour
+public class CameraController : Singleton<CameraController>
 {
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
 
@@ -20,8 +20,9 @@ public class CameraController : MonoBehaviour
     private Vector3 targetFollowOffset;
     private CinemachineTransposer cinemachineTransposer;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         cinemachineVirtualCamera = FindFirstObjectByType<CinemachineVirtualCamera>();
     }
 
@@ -97,5 +98,10 @@ public class CameraController : MonoBehaviour
 
         cinemachineTransposer.m_FollowOffset =
           Vector3.Lerp(cinemachineTransposer.m_FollowOffset, targetFollowOffset, zoomSpeed * Time.deltaTime);
+    }
+
+    public Vector3 GetCameraTargetFollowOffset()
+    {
+        return targetFollowOffset;
     }
 }

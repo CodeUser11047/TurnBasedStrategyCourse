@@ -156,7 +156,7 @@ public class ShootAction : BaseAction
 
     public override string GetActionName()
     {
-        return "Shoot";
+        return "射击";
     }
 
 }

@@ -101,7 +101,7 @@ public class MoveAction : BaseAction
 
     public override string GetActionName()
     {
-        return "Move";
+        return "移动";
     }
 
     public override int GetActionPointsCost()

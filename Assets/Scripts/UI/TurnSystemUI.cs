@@ -33,7 +33,7 @@ public class TurnSystemUI : MonoBehaviour
     }
     public void UpdateTurnNumberText()
     {
-        TurnNumberText.text = "TURN : " + TurnSystem.Instance.GetTurnNumber();
+        TurnNumberText.text = "当前回合数 ： " + TurnSystem.Instance.GetTurnNumber();
     }
 
     private void UpdateEnemyTurnVisual()

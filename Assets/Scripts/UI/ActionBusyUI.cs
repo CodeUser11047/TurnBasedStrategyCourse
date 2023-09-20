@@ -51,7 +51,7 @@ public class ActionBusyUI : MonoBehaviour
             yield return null;
         }
         if (isShowing)
-            text.text = "Actioning";
+            text.text = "行动中";
 
     }
 }
