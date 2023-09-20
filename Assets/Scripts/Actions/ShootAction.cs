@@ -142,8 +142,6 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        ActionStart(onActionComplete);
-
         targetUnit = LevelGrid.Instance.GetUnitOnGridPosition(gridPosition);
 
         // Debug.Log("瞄准");
@@ -152,6 +150,8 @@ public class ShootAction : BaseAction
         stateTimer = aimingStateTime;
 
         canShotBullet = true;
+
+        ActionStart(onActionComplete);
     }
 
     public override string GetActionName()

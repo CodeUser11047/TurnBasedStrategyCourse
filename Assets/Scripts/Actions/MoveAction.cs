@@ -32,11 +32,11 @@ public class MoveAction : BaseAction
 
     public override void TakeAction(GridPosition targetGridPosition, Action onActionComplete)
     {
-        ActionStart(onActionComplete);
-
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(targetGridPosition);
 
         OnStartMoving?.Invoke(this, EventArgs.Empty);
+
+        ActionStart(onActionComplete);
     }
 
     private void MoveMent()
