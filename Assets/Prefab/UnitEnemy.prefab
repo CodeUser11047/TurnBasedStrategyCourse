@@ -14,6 +14,81 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4339374296087770250, guid: 51008bedd89d7944b882268ce2e1f91a,
         type: 3}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.ctime2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.ctime3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key0.b
+      value: 0.06807256
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key0.r
+      value: 0.754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key1.g
+      value: 0.09411766
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key2.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key2.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key2.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key3.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.key3.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3155305538207502672, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: healthBarGradient.m_NumColorKeys
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3293320014479848829, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
         type: 3}
       propertyPath: m_Name
