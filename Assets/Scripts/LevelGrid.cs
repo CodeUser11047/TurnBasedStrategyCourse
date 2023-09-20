@@ -1,25 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelGrid : MonoBehaviour
+public class LevelGrid : Singleton<LevelGrid>
 {
-    public static LevelGrid Instance { get; private set; }
+    public event EventHandler OnAnyUnitMovedGridPosition;
+
 
     [SerializeField] private float cellsize = 2f;
     [SerializeField] private Transform debugPrefab;
 
     private GridSystem gridSystem;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.LogError("超过一个gridSystem" + transform + "_" + Instance);
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
+        base.Awake();
 
         gridSystem = new GridSystem(10, 10, cellsize);
         gridSystem.CreateDebugObjects(debugPrefab);
@@ -68,6 +64,8 @@ public class LevelGrid : MonoBehaviour
     {
         RemoveUnitAtGridPosition(fromGridPosition, unit);
         AddUnitAtPosition(toGridPosition, unit);
+
+        OnAnyUnitMovedGridPosition.Invoke(this, EventArgs.Empty);
     }
 
     public GridPosition GetGridPosition(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);

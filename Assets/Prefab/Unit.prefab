@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6244947291004706453}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 4736856143088569985}
   - component: {fileID: 3680895316481011139}
   - component: {fileID: 7398275254933168567}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 2062448364532149184}
   - component: {fileID: 3155305538207502672}
   - component: {fileID: 6498333686938276637}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: UnitWorldUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 6706708637505769854}
   - component: {fileID: 8180356998491664094}
   - component: {fileID: 229728913426514051}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +697,7 @@ GameObject:
   - component: {fileID: 1150268975035373732}
   - component: {fileID: 4481231153179777864}
   - component: {fileID: 8818173606803825212}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: ActionPointsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 5650901142696782488}
   - component: {fileID: 6445629558726804458}
   - component: {fileID: 4274757986766450147}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}

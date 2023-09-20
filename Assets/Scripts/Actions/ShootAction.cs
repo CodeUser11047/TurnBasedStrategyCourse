@@ -159,5 +159,21 @@ public class ShootAction : BaseAction
         return "射击";
     }
 
+    public Unit GetUnit()
+    {
+        return unit;
+    }
+
+    public Unit GetTargetUnit()
+    {
+        return targetUnit;
+    }
+
+    public int GetMaxShootDistance()
+    {
+        return maxShootDistance;
+    }
+
+
 }
 
