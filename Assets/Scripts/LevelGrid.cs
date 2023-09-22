@@ -6,8 +6,8 @@ using UnityEngine;
 public class LevelGrid : Singleton<LevelGrid>
 {
     public event EventHandler OnAnyUnitMovedGridPosition;
-
-
+    [SerializeField] private int height = 10;
+    [SerializeField] private int width = 10;
     [SerializeField] private float cellsize = 2f;
     [SerializeField] private Transform debugPrefab;
 
@@ -17,10 +17,15 @@ public class LevelGrid : Singleton<LevelGrid>
     {
         base.Awake();
 
-        gridSystem = new GridSystem<GridObject>(10, 10, cellsize,
+        gridSystem = new GridSystem<GridObject>(width, height, cellsize,
              (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
         //gridSystem.CreateDebugObjects(debugPrefab);
 
+    }
+
+    private void Start()
+    {
+        Pathfinding.Instance.SetUp(width, height, cellsize);
     }
 
     /// <summary>

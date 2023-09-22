@@ -10,6 +10,7 @@ public class Pathfinding : Singleton<Pathfinding>
     private const int MOVE_STRAIGHT_COST = 10;//直角边常量
     private const int MOVE_DIAGONAL_COST = 14;//斜边常量
     [SerializeField] private Transform debugPrefab;
+    [SerializeField] private LayerMask noWalkable;
     private int width;
     private int height;
     private float cellsize;
@@ -18,9 +19,33 @@ public class Pathfinding : Singleton<Pathfinding>
     protected override void Awake()
     {
         base.Awake();
-        gridSystem = new GridSystem<PathNode>(10, 10, 2f,
-             (GridSystem<PathNode> g, GridPosition gridPosition) => new PathNode(gridPosition));
-        gridSystem.CreateDebugObjects(debugPrefab);
+
+    }
+
+    public void SetUp(int width, int height, float cellsize)
+    {
+        this.width = width;
+        this.height = height;
+        this.cellsize = cellsize;
+
+        gridSystem = new GridSystem<PathNode>(width, height, cellsize,
+                    (GridSystem<PathNode> g, GridPosition gridPosition) => new PathNode(gridPosition));
+        //gridSystem.CreateDebugObjects(debugPrefab);
+
+        //检测障碍物
+        for (int x = 0; x < width; x++)
+        {
+            for (int z = 0; z < height; z++)
+            {
+                GridPosition gridPosition = new(x, z);
+                Vector3 woldPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+                float raycastOffestDistance = 5f;
+                if (Physics.Raycast(woldPosition + Vector3.down * raycastOffestDistance, Vector3.up, raycastOffestDistance * 2, noWalkable))
+                {
+                    GetNode(x, z).SetIsWalked(false);
+                }
+            }
+        }
     }
 
     public List<GridPosition> FindPath(GridPosition startGridPosition, GridPosition endGridPosition)
@@ -48,7 +73,7 @@ public class Pathfinding : Singleton<Pathfinding>
         startNode.SetGCost(0);
         startNode.SetHCost(CalculateDistance(startGridPosition, endGridPosition));
         startNode.CalculateFCost();
-
+        //开始寻路
         while (openList.Count > 0)
         {
             PathNode currentNode = GetLowestFCostNode(openList);
@@ -60,11 +85,16 @@ public class Pathfinding : Singleton<Pathfinding>
 
             openList.Remove(currentNode);
             closedList.Add(currentNode);
-
+            //寻路计算
             foreach (PathNode neighbourNode in GetNeighbourList(currentNode))
             {
                 if (closedList.Contains(neighbourNode))
                 {
+                    continue;
+                }
+                if (!neighbourNode.IsWalkable())
+                {
+                    closedList.Add(neighbourNode);
                     continue;
                 }
                 //获取到达相邻点将要获得的GCost
@@ -88,6 +118,8 @@ public class Pathfinding : Singleton<Pathfinding>
         //无路返回空值
         return null;
     }
+
+
     /// <summary>
     /// 计算期望权重
     /// </summary>

@@ -15,6 +15,9 @@ public class MoveAction : BaseAction
     [SerializeField] private float stopDistance = .1f;
     [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private int maxMoveDistance = 4;
+    private List<Vector3> positionList;
+    private int currentPositionIndex;
+
 
     private Vector3 targetPosition;
 
@@ -43,7 +46,11 @@ public class MoveAction : BaseAction
     {
         if (!isActive) { return; }
 
+        Vector3 targetPosition = positionList[currentPositionIndex];
         Vector3 moveDir = (targetPosition - transform.position).normalized;
+
+        // float rotateSpeed = 10f;
+        // transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
 
         if (Vector3.Distance(targetPosition, transform.position) > stopDistance)
         {

@@ -8,7 +8,8 @@ public class PathNode
 
     private int gCost;//已走过的距离
     private int hCost;//期望距离
-    private int fCost;
+    private int fCost;//总距离
+    private bool isWalkable = true;
     private PathNode cameFormPathNode;
 
     public PathNode(GridPosition gridPosition)
@@ -63,4 +64,13 @@ public class PathNode
         return cameFormPathNode;
     }
 
+    public bool IsWalkable()
+    {
+        return isWalkable;
+    }
+
+    public void SetIsWalked(bool isWalkable)
+    {
+        this.isWalkable = isWalkable;
+    }
 }
