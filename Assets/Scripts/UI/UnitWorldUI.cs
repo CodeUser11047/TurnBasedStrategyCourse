@@ -27,7 +27,8 @@ public class UnitWorldUI : MonoBehaviour
     #region 事件函数
     private void Unit_OnAnyActionPointChanged(object sender, EventArgs e)
     {
-        actionPointsText.text = "剩余行动点：" + unit.GetActionPoints().ToString();
+
+        UpdateActionPointsText();
     }
     private void HealthSystem_OnDamaged(object sender, EventArgs e)
     {
@@ -37,7 +38,8 @@ public class UnitWorldUI : MonoBehaviour
 
     private void UpdateActionPointsText()
     {
-        actionPointsText.text = "剩余行动点：" + unit.GetActionPoints().ToString();
+        if (!unit.IsEnemy())
+            actionPointsText.text = "剩余行动点：" + unit.GetActionPoints().ToString();
     }
 
     private void UpdateHealBar()

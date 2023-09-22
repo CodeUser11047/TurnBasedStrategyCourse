@@ -19,11 +19,11 @@ public class MoveAction : BaseAction
     private int currentPositionIndex;
 
 
-    private Vector3 targetPosition;
+    // private Vector3 targetPosition;
 
     protected override void Awake()
     {
-        targetPosition = transform.position;
+        // targetPosition = transform.position;
 
         base.Awake();
     }
@@ -35,7 +35,16 @@ public class MoveAction : BaseAction
 
     public override void TakeAction(GridPosition targetGridPosition, Action onActionComplete)
     {
-        this.targetPosition = LevelGrid.Instance.GetWorldPosition(targetGridPosition);
+        // this.targetPosition = LevelGrid.Instance.GetWorldPosition(targetGridPosition);
+        List<GridPosition> pathGridPositionList = Pathfinding.Instance.FindPath(unit.GetGridPosition(), targetGridPosition, out int pathLength);
+
+        currentPositionIndex = 0;
+        positionList = new List<Vector3>();
+
+        foreach (GridPosition pathGridPosition in pathGridPositionList)
+        {
+            positionList.Add(LevelGrid.Instance.GetWorldPosition(pathGridPosition));
+        }
 
         OnStartMoving?.Invoke(this, EventArgs.Empty);
 
@@ -49,22 +58,24 @@ public class MoveAction : BaseAction
         Vector3 targetPosition = positionList[currentPositionIndex];
         Vector3 moveDir = (targetPosition - transform.position).normalized;
 
-        // float rotateSpeed = 10f;
-        // transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
+
+        transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
 
         if (Vector3.Distance(targetPosition, transform.position) > stopDistance)
         {
             transform.position += moveSpeed * moveDir * Time.deltaTime;
-            transform.forward = Vector3.Lerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
         }
         else
         {
-            OnStopMoving?.Invoke(this, EventArgs.Empty);
-            //行动结束调用
-            ActionComplete();
+            currentPositionIndex++;
+            if (currentPositionIndex >= positionList.Count)
+            {
+                OnStopMoving?.Invoke(this, EventArgs.Empty);
+                //行动结束调用
+                ActionComplete();
+            }
         }
     }
-
     /// <summary>
     /// 返回可以移动到的所有格子位置的列表
     /// </summary>
@@ -95,6 +106,23 @@ public class MoveAction : BaseAction
                 if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
                 {
                     //当坐标有其他单位时跳过
+                    continue;
+                }
+
+                if (!Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
+                {
+                    continue;
+                }
+
+                if (!Pathfinding.Instance.HasPath(unitGridPosition, testGridPosition))
+                {
+                    continue;
+                }
+
+                int pathfindingDistanceMultiplier = 10;
+                if (Pathfinding.Instance.GetPathLength(unitGridPosition, testGridPosition) > maxMoveDistance * pathfindingDistanceMultiplier)
+                {
+                    // Path length is too long
                     continue;
                 }
 

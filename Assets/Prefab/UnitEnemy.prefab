@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1984264160925493907, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3033121703560780967, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
         type: 3}
       propertyPath: ragdollPrefab
@@ -99,6 +104,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7d22fc6b9a431b043a917fb89a80bcfc, type: 2}
+    - target: {fileID: 3916922493735310678, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5406620992936043811, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -153,6 +163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isEnemy
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818173606803825212, guid: 801c7e32c4e6cda408b80d3a8ae18f5b,
+        type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

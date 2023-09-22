@@ -21,6 +21,7 @@ public class ShootAction : BaseAction
     }
 
     [SerializeField] private int maxShootDistance = 7;
+    [SerializeField] private LayerMask obstaclesLayerMask;
     private State state = State.Idel;
     private float stateTimer;
     private Unit targetUnit;
@@ -37,7 +38,7 @@ public class ShootAction : BaseAction
         {
             case State.Aiming:
                 float rotateSpeed = 10f;
-                Vector3 aimDir = (targetUnit.GetWorlPosition() - unit.GetWorlPosition()).normalized;
+                Vector3 aimDir = (targetUnit.GetWorldPosition() - unit.GetWorldPosition()).normalized;
 
                 transform.forward = Vector3.Lerp(transform.forward, aimDir, Time.deltaTime * rotateSpeed);
                 break;
@@ -135,6 +136,21 @@ public class ShootAction : BaseAction
                 {
                     continue;
                 }
+
+                Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+                Vector3 shootDir = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+
+                float unitShoulderHeight = 1.7f;
+                if (Physics.Raycast(
+                        unitWorldPosition + Vector3.up * unitShoulderHeight,
+                        shootDir,
+                        Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()),
+                        obstaclesLayerMask))
+                {
+                    // 被遮挡
+                    continue;
+                }
+
 
                 validActionGridPositionList.Add(testGridPosition);
             }

@@ -39,7 +39,7 @@ public class UnitAnimator : MonoBehaviour
             Instantiate(bulletPrefab, shootPointTranform.position, Quaternion.identity);
         BulletProjectile bulletProjectile = bulletProjectileTransform.GetComponent<BulletProjectile>();
 
-        Vector3 targetUnitShootAtPosition = e.targetUnit.GetWorlPosition();
+        Vector3 targetUnitShootAtPosition = e.targetUnit.GetWorldPosition();
         bulletProjectile.SetUp(targetUnitShootAtPosition);
     }
 }
