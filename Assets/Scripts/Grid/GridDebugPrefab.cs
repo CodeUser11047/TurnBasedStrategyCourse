@@ -6,13 +6,12 @@ using UnityEngine;
 public class GridDebugPrefab : MonoBehaviour
 {
     [SerializeField] private TextMeshPro text;
+    private GridObject gridObject;
 
     private void Update()
     {
         text.text = gridObject.ToString();
     }
-    private GridObject gridObject;
-
     public void SetGridObject(GridObject gridObject)
     {
         this.gridObject = gridObject;

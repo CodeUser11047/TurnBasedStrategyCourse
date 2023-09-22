@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GridObject
 {
-    private GridSystem gridSystem;
+    private GridSystem<GridObject> gridSystem;
     private GridPosition gridPosition;
     private List<Unit> unitList;
 
@@ -14,7 +14,7 @@ public class GridObject
     /// </summary>
     /// <param name="gridSystem">当前所在的格子系统</param>
     /// <param name="gridPosition">格子物体所在系统内的二维坐标</param>
-    public GridObject(GridSystem gridSystem, GridPosition gridPosition)
+    public GridObject(GridSystem<GridObject> gridSystem, GridPosition gridPosition)
     {
         this.gridSystem = gridSystem;
         this.gridPosition = gridPosition;

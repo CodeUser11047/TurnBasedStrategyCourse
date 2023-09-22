@@ -42,6 +42,8 @@ public class GridSystemVisual : Singleton<GridSystemVisual>
 
         UnitActionSystem.Instance.OnSelectedActionChanged += UnitActionSystem_OnSelectedActionChanged;
         LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
+        TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
+        Unit.OnAnyUnitDead += Unit_OnAnyUnitDead;
 
         HideAllGridPosition();
     }
@@ -107,7 +109,7 @@ public class GridSystemVisual : Singleton<GridSystemVisual>
         }
     }
 
-    private void UpdateGridVisual()
+    public void UpdateGridVisual()
     {
         HideAllGridPosition();
 
@@ -135,7 +137,7 @@ public class GridSystemVisual : Singleton<GridSystemVisual>
             ShowGridPositionList(selectedAction.GetValidActionGridPositionList(), gridVisualType);
 
     }
-
+    #region 事件函数
     private void UnitActionSystem_OnSelectedActionChanged(object sender, EventArgs e)
     {
         UpdateGridVisual();
@@ -144,7 +146,15 @@ public class GridSystemVisual : Singleton<GridSystemVisual>
     {
         UpdateGridVisual();
     }
-
+    private void Unit_OnAnyUnitDead(object sender, EventArgs e)
+    {
+        UpdateGridVisual();
+    }
+    private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
+    {
+        UpdateGridVisual();
+    }
+    #endregion
     private Material GetGridVisualTypeMaterial(GridVisualType gridVisualType)
     {
         foreach (GridVisualTypeMaterial gridVisualTypeMaterial in gridVisualTypeMaterialList)

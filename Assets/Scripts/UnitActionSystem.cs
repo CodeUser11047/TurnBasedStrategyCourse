@@ -23,7 +23,7 @@ public class UnitActionSystem : Singleton<UnitActionSystem>
 
     private void Start()
     {
-        // SetSelectedUnit(selectedUnit);
+        TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
     }
 
     private void Update()
@@ -102,7 +102,7 @@ public class UnitActionSystem : Singleton<UnitActionSystem>
 
             SetBusy();
             selectedAction.TakeAction(mouseGridPosition, ClearBusy);
-            
+
             OnActionStarted?.Invoke(this, EventArgs.Empty);
             //以上等同于以下
             // if (selectedAction.IsVaildActionGridPosition(mouseGridPosition))
@@ -120,7 +120,7 @@ public class UnitActionSystem : Singleton<UnitActionSystem>
     {
 
         selectedUnit = unit;
-        SetSelectedAction(unit.GetMoveAction());
+        SetSelectedAction(unit.GetAction<MoveAction>());
 
         OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
 
@@ -141,5 +141,8 @@ public class UnitActionSystem : Singleton<UnitActionSystem>
     {
         return selectedAction;
     }
-
+    private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
+    {
+        selectedAction = null;
+    }
 }
