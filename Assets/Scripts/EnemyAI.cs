@@ -6,7 +6,19 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+
+    private enum State
+    {
+        WaitingForEnemyTurn,
+        TakingTutn,
+        Busy
+    }
     private float timer;
+    private State state;
+    private void Awake()
+    {
+        state = State.WaitingForEnemyTurn;
+    }
 
     private void Start()
     {
@@ -18,15 +30,100 @@ public class EnemyAI : MonoBehaviour
         {
             return;
         }
-
-        timer -= Time.deltaTime;
-        if (timer <= 0)
+        switch (state)
         {
-            TurnSystem.Instance.NextTurn();
+            case State.WaitingForEnemyTurn:
+
+                break;
+            case State.TakingTutn:
+                timer -= Time.deltaTime;
+                if (timer <= 0)
+                {
+                    state = State.Busy;
+                    if (TryTakeEnemyAIAction(SetStateTakingTurn))
+                    {
+                        state = State.Busy;
+                    }
+                    else
+                    {
+                        //没有可操作的行动
+                        TurnSystem.Instance.NextTurn();
+                    }
+                }
+                break;
+            case State.Busy:
+
+                break;
         }
+
     }
+
+    private void SetStateTakingTurn()
+    {
+        timer = .5f;
+        state = State.TakingTutn;
+    }
+
     private void TurnSystem_OnTurnChanged(object sender, EventArgs e)
     {
-        timer = 2f;
+        if (!TurnSystem.Instance.IsPlayerTurn())
+        {
+            state = State.TakingTutn;
+            timer = 2f;
+        }
+    }
+
+    private bool TryTakeEnemyAIAction(Action onEnemyAIActionComplete)
+    {
+
+        foreach (Unit enemyUnit in UnitManager.Instance.GetEnemyUnitList())
+        {
+            if (TryTakeEnemyAIAction(enemyUnit, onEnemyAIActionComplete))
+            {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private bool TryTakeEnemyAIAction(Unit enemyUnit, Action onEnemyAIActionComplete)
+    {
+        EnemyAIAction bestEnemyAIAction = null;
+        BaseAction bestBaseAction = null;
+
+        foreach (BaseAction baseAction in enemyUnit.GetBaseActionArry())
+        {
+            if (!enemyUnit.CanTakeActionPointsToTakeAction(baseAction))
+            {
+                //敌人无法执行该行为
+                continue;
+            }
+            if (bestEnemyAIAction == null)
+            {
+                bestEnemyAIAction = baseAction.GetBaseEnemyAIAction();
+                bestBaseAction = baseAction;
+            }
+            else
+            {
+                EnemyAIAction testEnemyAIAction = baseAction.GetBaseEnemyAIAction();
+                if (testEnemyAIAction != null && testEnemyAIAction.actionValue > bestEnemyAIAction.actionValue)
+                {
+                    bestEnemyAIAction = testEnemyAIAction;
+                    bestBaseAction = baseAction;
+                }
+            }
+        }
+
+        if (bestEnemyAIAction != null && enemyUnit.TrySpendActionPointsToTakeAction(bestBaseAction))
+        {
+            bestBaseAction.TakeAction(bestEnemyAIAction.gridPosition, onEnemyAIActionComplete);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }

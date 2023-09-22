@@ -99,12 +99,15 @@ public class ShootAction : BaseAction
         targetUnit.Damage(40, transform);
     }
 
-
     public override List<GridPosition> GetValidActionGridPositionList()
+    {
+        GridPosition unitGridPosition = unit.GetGridPosition();
+        return GetValidActionGridPositionList(unitGridPosition);
+    }
+    public List<GridPosition> GetValidActionGridPositionList(GridPosition unitGridPosition)
     {
         List<GridPosition> validActionGridPositionList = new();
 
-        GridPosition unitGridPosition = unit.GetGridPosition();
         for (int x = -maxShootDistance; x <= maxShootDistance; x++)
         {
             for (int z = -maxShootDistance; z <= maxShootDistance; z++)
@@ -136,7 +139,7 @@ public class ShootAction : BaseAction
                 validActionGridPositionList.Add(testGridPosition);
             }
         }
-
+        //返回有敌人并且在范围内的GridPosition
         return validActionGridPositionList;
     }
 
@@ -173,7 +176,21 @@ public class ShootAction : BaseAction
     {
         return maxShootDistance;
     }
+    public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
+    {
+        Unit targetUnit = LevelGrid.Instance.GetUnitOnGridPosition(gridPosition);
 
+        return new EnemyAIAction
+        {
+            gridPosition = gridPosition,
+            actionValue = 100 + Mathf.RoundToInt((1 - targetUnit.GetHealthNormailzed()) * 100f),
+        };
+    }
+
+    public int GetTargetCountAtPosition(GridPosition gridPosition)
+    {
+        return GetValidActionGridPositionList(gridPosition).Count;
+    }
 
 }
 

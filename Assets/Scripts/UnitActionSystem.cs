@@ -102,6 +102,7 @@ public class UnitActionSystem : Singleton<UnitActionSystem>
 
             SetBusy();
             selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+            
             OnActionStarted?.Invoke(this, EventArgs.Empty);
             //以上等同于以下
             // if (selectedAction.IsVaildActionGridPosition(mouseGridPosition))

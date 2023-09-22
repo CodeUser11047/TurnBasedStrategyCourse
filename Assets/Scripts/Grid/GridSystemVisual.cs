@@ -131,7 +131,8 @@ public class GridSystemVisual : Singleton<GridSystemVisual>
                 ShowGridPositionRange(selectedUnit.GetGridPosition(), shootAction.GetMaxShootDistance(), GridVisualType.RedSoft);
                 break;
         }
-        ShowGridPositionList(selectedAction.GetValidActionGridPositionList(), gridVisualType);
+        if (selectedAction != null)
+            ShowGridPositionList(selectedAction.GetValidActionGridPositionList(), gridVisualType);
 
     }
 

@@ -106,8 +106,12 @@ public class UnitActionSystemUI : MonoBehaviour
 
     private void UpdateActionPoints()
     {
-        Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
-        actionPointText.text = "剩余可用行动点 : " + selectedUnit.GetActionPoints();
+        if (UnitActionSystem.Instance.GetSelectedUnit() != null)
+        {
+            Unit selectedUnit = UnitActionSystem.Instance.GetSelectedUnit();
+            actionPointText.text = "剩余可用行动点 : " + selectedUnit.GetActionPoints();
+        }
+
     }
 
 
